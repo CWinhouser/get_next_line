@@ -6,7 +6,7 @@
 /*   By: ktwomey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 08:06:08 by ktwomey           #+#    #+#             */
-/*   Updated: 2018/06/15 10:48:18 by ktwomey          ###   ########.fr       */
+/*   Updated: 2018/06/27 08:08:27 by ktwomey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,58 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-static int			ft_isnewline (const char *str)
+static int			ft_line(char **line, char **line_read)
 {
-	if (ft_strcmp(str, '\n') != 0)
-	{
-		return (0);
-	}
-	else 
-		return (1);
-}
-	
-static int			ft_linecpy(const char *str)
-{
-	int i;
+	 char	*temp;
+	 int	n;
 
-	i = 0;
-	while (str[i] != '\n' && str[i] != '\0')
-		i++;
-	return (i);
+	 n = 0;
+	 while((*line_read)[n] != '\n' && (*line_read)[n])
+		 n++;
+	 if((*line_read)[n] == '\n')
+	 {
+		 *line = ft_strsub(*line_read, 0 , n);
+		 temp = ft_strdup((*line_read) + n + 1);
+		 ft_strdel(&(*line_read));
+		 line_read = &temp;
+		 if((*line_read)[0] == '\0')
+			 ft_strdel(&(*line_read));
+	 }
+	 else if((*line_read) == '\0')
+	 {
+		 *line = ft_strdup((*line_read));
+		 ft_strdel(&(*line_read));
+	 }
+	 return (1);
 }
 
 int					get_next_line (const int fd, char **line)
 {
-	static char	*line_read;
+	static char	*line_read[0];
 	int			i;
 	char		buff[BUFF_SIZE + 1];
-	char		*temp;
+//	char		*temp;
 
-	if (!line_read)
-		line_read = ft_strnew(1);
-	if (read(fd, buff, BUFF_SIZE) == -1)
-		return (-1);
-	while ((i = read(fd, buff, BUFF_SIZE)))
+	if(!(*line_read))
+		*line_read = ft_strnew(0);
+	while ((i = read(fd, buff, BUFF_SIZE) > 0))
 	{
-		line_read = ft_strjoin(line_read, buff);
-		if (ft_isnewline(buff) = 1 || i == 0)
-			break;
+/*		if(!(*line_read))
+			*line_read = ft_strnew(0);
+*/		buff[i] = '\0';
+		*line_read = ft_strjoin(*line_read, buff);
+		//printf("%s", *line_read);
+		//printf("%d", i);
+		if (ft_strchr(buff, '\n'))
+			break ;
 	}
-	*line = ft_strndup(line_read, ft_linecpy(line_read));
+	if (i < 0)
+		return (-1);
+	if ((i ==  0) && ((*line_read) == NULL || *line_read[0] == '\0'))
+		return (0);
+	//printf ("%s", *line_read);
+	return(ft_line(line, line_read));
 }
-
 
 int     main(int ac, char **av)
 {
@@ -73,7 +85,7 @@ int     main(int ac, char **av)
    while (i--)
    {
        ret = get_next_line(fd,&line);
-       printf("%s",line);
+//       printf("%s",line);
        //free(line);
    }
    return (0);
