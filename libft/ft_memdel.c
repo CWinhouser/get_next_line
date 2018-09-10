@@ -6,7 +6,7 @@
 /*   By: ktwomey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 13:54:27 by ktwomey           #+#    #+#             */
-/*   Updated: 2018/05/29 13:55:14 by ktwomey          ###   ########.fr       */
+/*   Updated: 2018/06/11 10:36:08 by ktwomey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_memdel(void **del)
 {
-	free(*del);
-	*del = NULL;
+	if (del && *del)
+	{
+		free(*del);
+		*del = NULL;
+	}
 }

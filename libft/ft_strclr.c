@@ -6,21 +6,14 @@
 /*   By: ktwomey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 08:16:00 by ktwomey           #+#    #+#             */
-/*   Updated: 2018/05/31 13:41:38 by ktwomey          ###   ########.fr       */
+/*   Updated: 2018/06/11 09:10:11 by ktwomey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	ft_strclr(char *str)
+void	ft_strclr(char *str)
 {
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		str[i] = '\0';
-		i++;
-	}
-	return (*str);
+	while (str != NULL && *str)
+		*str++ = '\0';
 }

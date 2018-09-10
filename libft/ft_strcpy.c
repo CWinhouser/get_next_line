@@ -6,7 +6,7 @@
 /*   By: ktwomey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 08:36:49 by ktwomey           #+#    #+#             */
-/*   Updated: 2018/06/14 10:01:50 by ktwomey          ###   ########.fr       */
+/*   Updated: 2018/06/18 10:42:04 by ktwomey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ char	*ft_strcpy(char *dest, const char *src)
 		i++;
 	}
 	dest[i] = '\0';
-	
 	return (dest);
 }

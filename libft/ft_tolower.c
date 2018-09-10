@@ -6,11 +6,11 @@
 /*   By: ktwomey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 13:44:14 by ktwomey           #+#    #+#             */
-/*   Updated: 2018/05/22 09:17:16 by ktwomey          ###   ########.fr       */
+/*   Updated: 2018/06/04 10:40:08 by ktwomey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(char str)
+int	ft_tolower(int str)
 {
 	if (str <= 90 && str >= 65)
 	{
